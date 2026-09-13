@@ -3,7 +3,7 @@ This repo is showcases my hands-on cloud security epxloration where I deployed a
 
 ## Overview
 
-In this project, I deployed an intentionally insecure copy of the [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/) web app on AWS using an AWS CloudFormation template. Once it was running, I switched into "attacker mode" and exploited two real, well-known web vulnerabilities — SQL injection and command injection — to steal temporary AWS credentials from the web server and use them to access private data stored in an S3 bucket.
+In this project, I deployed an intentionally insecure copy of the [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/) web app on AWS using an AWS CloudFormation template. Once it was running, I switched into "attacker mode" and exploited two real, well-known web vulnerabilities ( SQL injection and command injection ) to steal temporary AWS credentials from the web server and use them to access private data stored in an S3 bucket.
 
 After completing the attack, I switched back to the defender's perspective and used **Amazon GuardDuty**, AWS's threat detection service, to check whether it picked up on the attack, and to work through exactly what it found and why.
 
