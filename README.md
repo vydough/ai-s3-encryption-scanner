@@ -70,37 +70,37 @@ data plus Gemini AI summary to CloudWatch Logs.
 7. **Automation for 24 hours**: Using EventBridge scheduler to trigger scan every24 hours (daily) instead of relying on manual invocations, results are outputted in CloudWatch Logs
 
 ## Project Demo
-![Creating the s3_scanner.py file](assets/screenshots/01-scanner-code-02.png)
+![Creating the s3_scanner.py file](/images/01-scanner-code-02.png)
 *Creating `s3_scanner.py` file in the*
 
-![Creating the s3_scanner.py file](assets/screenshots/01-scanner-code-02.png)
+![Creating the s3_scanner.py file](/images/01-scanner-code-02.png)
 *Creating `s3_scanner.py` in the Cursor file explorer.*
 
-![Listing S3 buckets](assets/screenshots/01-scanner-code-03.png)
+![Listing S3 buckets](/images/01-scanner-code-03.png)
 *Part 1 of the scanner: connecting to S3 and listing all buckets in the account.*
 
-![Encryption check added](assets/screenshots/01-scanner-code-04.png)
+![Encryption check added](/images/01-scanner-code-04.png)
 *Part 2 added: checking each bucket for server-side encryption.*
 
-![Gemini AI analysis added](assets/screenshots/01-scanner-code-05.png)
+![Gemini AI analysis added](/images/01-scanner-code-05.png)
 *The completed scanner, with the Gemini AI analysis step added to turn the raw findings into a security summary.*
 
-![IAM role with required policies](assets/screenshots/02-iam-role.png)
+![IAM role with required policies](/images/02-iam-role.png)
 *The `LambdaS3ScannerRole` IAM role, showing both the custom `S3EncryptionReadPolicy` and the AWS-managed `AWSLambdaBasicExecutionRole` attached.*
 
-![Lambda test event configuration](assets/screenshots/03-lambda-test-event.png)
+![Lambda test event configuration](/images/03-lambda-test-event.png)
 *The test event set up in the Lambda console before running a manual invocation.*
 
-![Lambda test execution succeeded](assets/screenshots/04-lambda-test-results-01.png)
+![Lambda test execution succeeded](/images/04-lambda-test-results-01.png)
 *A successful test run, proved by the green "Executing function: succeeded" banner and outputs.*
 
-![Lambda log output showing scan details](assets/screenshots/04-lambda-test-results-02.png)
+![Lambda log output showing scan details](/images/04-lambda-test-results-02.png)
 *Log output from the test run, showing each bucket's encryption status as it was scanned.*
 
-![Lambda response with AI analysis](assets/screenshots/04-lambda-test-results-03.png)
+![Lambda response with AI analysis](/images/04-lambda-test-results-03.png)
 *The JSON response from the test run, including Gemini's AI-generated security analysis under `ai_analysis`.*
 
-![EventBridge scheduled rule](assets/screenshots/05-eventbridge-rule.png)
+![EventBridge scheduled rule](/images/05-eventbridge-rule.png)
 *The `daily-s3-security-scan` EventBridge rule, configured to trigger the Lambda function every 12 hours.*
 
 
