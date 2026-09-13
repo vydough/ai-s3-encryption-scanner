@@ -1,0 +1,23 @@
+# Security Considerations
+
+## What went wrong
+
+- **No input sanitisation on the login form** → allowed SQL injection to bypass authentication.
+- **No input validation on the username field** → allowed command injection, letting arbitrary code run on the server.
+- **EC2 instance metadata reachable and unrestricted** → let injected code steal the instance's temporary IAM credentials.
+- **Stolen credentials written to a public file** → anyone with the URL could take them too.
+- **Broad IAM permissions on the EC2 instance** → once stolen, credentials could reach the S3 bucket.
+
+## How to fix each one
+
+- Use **parameterised queries / an ORM** — never insert user input directly into a query string.
+- **Validate and sanitise all input**, especially anywhere it could later be executed.
+- **Enforce IMDSv2** on EC2 instances — much harder to abuse than IMDSv1.
+- Apply **least-privilege IAM roles** — only the exact permissions needed, nothing broader.
+- Never write sensitive data into a publicly served directory.
+- Add **AWS WAF** in front of the app to block common injection payloads.
+- Keep **GuardDuty enabled and monitored** from day one, so a real breach is caught quickly.
+
+## Why it matters
+
+Defending against this means checking against all layers of security. 
