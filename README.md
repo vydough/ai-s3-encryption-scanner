@@ -81,7 +81,7 @@ The full walkthrough, including the exact commands and payloads used, is documen
 
 ## GuardDuty Findings
 
-GuardDuty flagged the attack as `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.InsideAWS` — meaning it detected that credentials belonging to the EC2 instance were being used from a different AWS account (CloudShell runs under a temporary, separate account ID), which is exactly what happened when the stolen credentials were used to access the S3 bucket. Full details, including severity and what each part of the finding means, are in [`docs/guardduty-findings.md`](docs/guardduty-findings.md).
+GuardDuty flagged the attack as `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.InsideAWS` meaning it detected that credentials belonging to the EC2 instance were being used from a different AWS account (CloudShell runs under a temporary, separate account ID), which is exactly what happened when the stolen credentials were used to access the S3 bucket. Full details, including severity and what each part of the finding means, are in [`docs/guardduty-findings.md`](docs/guardduty-findings.md).
 
 ## Evidence
 
