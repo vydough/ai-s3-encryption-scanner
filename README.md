@@ -11,11 +11,12 @@ bucket for server-side encryption, and Gemini AI reads the results and
 writes a short explanation in plain english of the risk and what to fix first. 
 
 ## Project Purpose
-
 I did this project to get hands-on experience with learning how to configure lambda functions, IAM roles and APIs altogether to lead to a real world AWS deployment tool. I wanted to create a simple scanner base tool that is able to offer AI capabilities and insight for users for greater maintainability of cloud-based systems.
 
-## Objectives
+## Challenges and Solutions / What I learned 
+This project taught me how to check S3 bucket encryption programmatically via boto3, including handling cases where buckets have no encryption at all. I also learned how to package external python libraries for lambda as lambda itself does not come with anything pre-installed. For AWS specifically, I was able to refine my current understanding of IAM roles. I implemented least-priviledge to two policies instead of allowing broader S3 access. I also had to amend the handler setting, since Lambda defaults to looking for a file called lambda_function.py whereas my code was in s3_scanner.py instead, so I updated the handler to s3_scanner.lambda_handler. Initially, this caused issues in locating the handler when deploying the Lambda. 
 
+## Objectives
 - Write a Lambda function that lists S3 buckets and checks each one for
   server-side encryption.
 - Integrate the Gemini API so scan results are explained in plain language,
@@ -34,7 +35,6 @@ I did this project to get hands-on experience with learning how to configure lam
   12 hours without anyone needing to run it manually.
 - **Centralised logging** - every run (manual or scheduled) writes its
   output to Amazon CloudWatch Logs.
-
 
 ## Technologies Used
 - **Python 3.12** — the language the Lambda function is written in.
@@ -134,10 +134,6 @@ ai-security-scanner-s3/
     └── 05-eventbridge-rule.png 
        
 ```
-
-
-
-## Challenges and Solutions / What I learned 
 
 ## Future Improvements / Considerations
 - Add SNS or Slack notifications instead of relying on someone checking
