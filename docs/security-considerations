@@ -1,23 +1,45 @@
-# Security Considerations
+# Security Considerations Of This Project 
 
-## What went wrong
+This project was a learning exercise so there were a few security considerations when making the scanner to ensure best practices. 
 
-- **No input sanitisation on the login form** → allowed SQL injection to bypass authentication.
-- **No input validation on the username field** → allowed command injection, letting arbitrary code run on the server.
-- **EC2 instance metadata reachable and unrestricted** → let injected code steal the instance's temporary IAM credentials.
-- **Stolen credentials written to a public file** → anyone with the URL could take them too.
-- **Broad IAM permissions on the EC2 instance** → once stolen, credentials could reach the S3 bucket.
+## What the scanner actually checks
+The Lambda function only checks one thing: whether each S3 bucket has
+default server-side encryption configured (`AES256` or `aws:kms`). It does
+not check bucket policies, public access settings, versioning, logging, or
+any other S3 security control. A bucket could pass this scan and still be
+publicly readable (i.e. encryption at rest and public access are
+separate settings in S3 and not included in the scan)
 
-## How to fix each one
+## Handling the Gemini API key
+The API key is stored as a Lambda environment variable rather than being
+hardcoded in `src/s3_scanner.py` or committed to this repository. Lambda
+environment variables are encrypted at rest by AWS, which is why this
+pattern (read the key with `os.environ.get(...)`) is used instead of a
+plaintext config file. `.env.example` documents the variable name without
+containing a real key, and `.env` is excluded via `.gitignore` in case a
+local copy is ever created for testing.
 
-- Use **parameterised queries / an ORM** — never insert user input directly into a query string.
-- **Validate and sanitise all input**, especially anywhere it could later be executed.
-- **Enforce IMDSv2** on EC2 instances — much harder to abuse than IMDSv1.
-- Apply **least-privilege IAM roles** — only the exact permissions needed, nothing broader.
-- Never write sensitive data into a publicly served directory.
-- Add **AWS WAF** in front of the app to block common injection payloads.
-- Keep **GuardDuty enabled and monitored** from day one, so a real breach is caught quickly.
+## Least-privilege IAM roles 
+The Lambda execution role (`LambdaS3ScannerRole`) is scoped narrowly on
+purpose:
 
-## Why it matters
+- `s3:ListAllMyBuckets` and `s3:GetEncryptionConfiguration` are the only S3
+  permissions granted, and both are read-only. The function can't modify,
+  delete, or create anything in S3.
+- `AWSLambdaBasicExecutionRole` is the only other policy attached, and it
+  only allows writing to CloudWatch Logs.
 
-Defending against this means checking against all layers of security. 
+This means that even if the Lambda code or its dependencies were somehow
+compromised, the impact is limited to reading bucket names and
+encryption settings and not other roles. 
+
+## Known limitations
+- The scan results and AI analysis currently only go to CloudWatch Logs.
+  There's no alerting (email, Slack, etc.) if unencrypted buckets are
+  found, someone has to go and check the logs. This is a consideration as
+  part of my future implementations.
+- The function doesn't take any remediation action (such as enabling
+  encryption automatically) and it only reports.
+- Gemini's analysis is generated text, not a guaranteed-accurate security
+  audit. It is used to convert raw text into plain english for understanding 
+  but cannot be fully relied upon.
