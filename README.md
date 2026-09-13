@@ -1,6 +1,6 @@
 # AI-Based (Gemini) S3 Encryption Scanner (With Daily Scheduler)
 
-A serverless security tool that scans every S3 bucket in an AWS account for missing encryption, then uses Google Gemini to turn the raw findings into a plain-english security assessment. Built using AWS Lambda, with an optional Amazon EventBridge schedule so the scan runs automatically every 24 hours daily instead of only on manual invocation.
+A server-less security tool that scans every S3 bucket in an AWS account for missing encryption, then uses Google Gemini to turn the raw findings into a plain english security assessment. Built using AWS Lambda, with an optional Amazon EventBridge schedule so the scan runs automatically every 24 hours daily instead of only on manual invocation.
 
 ## Overview
 Checking every S3 bucket in an account for encryption by hand doesn't scale
@@ -37,7 +37,6 @@ I did this project to get hands-on experience with learning how to configure lam
 
 
 ## Technologies Used
-
 - **Python 3.12** — the language the Lambda function is written in.
 - **AWS Lambda** — runs the scanner function without needing a dedicated
   server. AWS only charges for the time the code actually runs.
@@ -45,16 +44,15 @@ I did this project to get hands-on experience with learning how to configure lam
   Python SDK, used here to list buckets and read each one's encryption
   configuration.
 - **AWS IAM** — defines exactly what the Lambda function is allowed to do
-  (read-only access to bucket lists and encryption settings, plus
+  (read-only access to bucket lists and encryption settings, and 
   permission to write logs).
-- **Google Gemini AI** (`google-generativeai`) — a large language model used
-  to turn the structured scan results into a short, readable security
+- **Google Gemini AI** (`google-generativeai`) — AI model used to turn the structured scan results into a short, readable security
   assessment.
 - **Amazon EventBridge** — schedules the Lambda function to run
   automatically on a recurring basis, instead of only when triggered
   manually.
 - **Amazon CloudWatch Logs** — stores the output of every Lambda execution
-  so scan results can be checked after the fact.
+  so scan results can be checked.
 
 ## Architecture
 
@@ -69,18 +67,29 @@ data plus Gemini AI summary to CloudWatch Logs.
 ai-security-scanner-s3/
 ├── README.md                  # This file
 ├── requirements.txt            # Python dependencies (boto3, google-genai)
-├── .env.example                # Documents the GOOGLE_API_KEY variable (not real key)
-├── .gitignore                  # Excludes venv/, package/, zips, .env, OS junk
+├── .gitignore                  # Excludes venv/, package/, zips, .env,
 ├── src/
 │   └── s3_scanner.py           # The Lambda function: scan + AI analysis
 ├── infrastructure/
-│   ├── iam/
-│   │   ├── s3-encryption-read-policy.json  # Read-only S3 permissions
-│   │   └── lambda-trust-policy.json        # Lets Lambda assume the role
-│   └── eventbridge-schedule.md # Secret mission: scheduled scan config
+│   └── iam/
+│       ├── s3-encryption-read-policy.json  # Read-only S3 permissions
+│       └── lambda-trust-policy.json        # Lets Lambda assume the role
 ├── scripts/
 │   └── test_event.json                    # Sample event for manual testing
-
+└── images/                                # Images taken from the project
+    ├── 01-scanner-code.png
+    ├── 01-scanner-code-01.png
+    ├── 01-scanner-code-02.png
+    ├── 01-scanner-code-03.png
+    ├── 01-scanner-code-04.png
+    ├── 02-iam-role.png
+    ├── 03-lambda-test-event.png
+    ├── 04-lambda-test-results-01.png
+    ├── 04-lambda-test-results-02.png
+    ├── 04-lambda-test-results-03.png
+    ├── 04-lambda-test-results-03.png
+    └── 05-eventbridge-rule.png 
+       
 ```
 
 ## Methodology
@@ -88,7 +97,7 @@ ai-security-scanner-s3/
 The project was split into five main steps, carried out in order:
 
 1. **Getting Gemini API Key**: Obtaining the key from Google AI Studio
-2. **Cursor Project Creation**: Creating the project folder in Cursor (aws monitor gemini)
+2. **Project Creation**: Creating the project folder in any code editor (aws monitor gemini)
 3. **Creating the scanner.py file**: Adding he code to connect to S3, list buckets and encryption check, calling out to Gemini to turn raw scan results into readable risk summaries.
 4. **Creating IAM Policy**: read-only access to bucket, attaching it to Lambda role
 5. **Building Python depedencies**: creating zip file as Lambda does not have boto3 or google-genai pre-installed
