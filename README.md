@@ -157,31 +157,6 @@ This feature emails/notifies users when the script is activated.
 ![Adding IAM policy for SNS Publishing](/images/challenge/10-adding-iam-policy.png)
 ![Creating SNS Email Topic to alert invocations](/images/challenge/11-sns-topic-creation.png)
 
-### Auto-remediation 
-Instead of identifuing and rpeorting unencrypted buckets, 
-this feature enables encryption automatically.
-
-Although riskier, I added an additional Lambda role to 
-have write access to S3 (Instead of it being read-only). 
-
-1. **Creating disposable test bucket**: Creating a disposable *unencrypted* test bucket for testing prior to implementing on the actual bucket itself (due to this function being a write action)
-2. **Create IAM policy for remediation**: Adding IAM policy for this function limiting it to only write encryption in the bucket.
-3. **Attaching policy to Lambda role**: Adding the created policy 'S3RemediationPolicy' to 'LambdaS3ScannerRole'
-4. **Adding Environment variable**: Adding AUTO_REMEDIATE as environment variable as true so function includes this feature
-5. **Testing**: Test on the disposable unencrypted bucket and confirm that it has been encrypted after invoking the function.
-
-![Amending the code for S3-scanner.py](/images/challenge/02-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/03-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/04-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/05-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/06-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/07-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/08-amending-s3-scanner.png)
-![Amending the code for S3-scanner.py](/images/challenge/09-amending-s3-scanner.png)
-![Creating the IAM remediation policy with JSON](/images/challenge/12-creating-remediation-policy.png)
-![Naming and describing the IAM policy](/images/challenge/13-naming-remediation-policy.png)
-![Adding the IAM policy to the LambdaS3ScannerRole](/images/challenge/14-adding-policy-to-role)
-
 ## References
 - [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/)
 - [Amazon S3 encryption documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
