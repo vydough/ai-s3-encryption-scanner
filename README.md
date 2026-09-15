@@ -2,6 +2,8 @@
 
 A server-less security tool that scans every S3 bucket in an AWS account for missing encryption, then uses Google Gemini to turn the raw findings into a plain english security assessment. Built using AWS Lambda, with an optional Amazon EventBridge schedule so the scan runs automatically every 24 hours daily instead of only on manual invocation.
 
+![Diagram of Project Architecture](/images/architecture-diagram.png)
+
 ## Overview
 Checking every S3 bucket in an account for encryption by hand doesn't scale
 past a handful of buckets, and even when you do check, a raw
