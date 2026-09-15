@@ -162,7 +162,7 @@ This feature emails/notifies users when the script is activated.
 
 ![Amending the code for S3-scanner.py](/images/challenge/01-amending-s3-scanner.png)
 ![Adding IAM policy for SNS Publishing](/images/challenge/02-iam-role.png)
-![Adding IAM policy for SNS Publishing](/images/challenge/03-SNSpublishpolicy.png)
+![Adding IAM policy for SNS Publishing](/images/challenge/03-adding-iam-policy.png)
 ![Creating SNS Email Topic to alert invocations](/images/challenge/04-creating-sns-topic.png)
 
 ## References
