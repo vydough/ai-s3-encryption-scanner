@@ -119,7 +119,6 @@ ai-security-scanner-s3/
 ├── scripts/
 │   └── test_event.json                    # Sample event for manual testing
 └── images/                                # Images taken from the project
-    ├── 01-scanner-code.png
     ├── 01-scanner-code-01.png
     ├── 01-scanner-code-02.png
     ├── 01-scanner-code-03.png
@@ -131,7 +130,15 @@ ai-security-scanner-s3/
     ├── 04-lambda-test-results-02.png
     ├── 04-lambda-test-results-03.png
     ├── 04-lambda-test-results-03.png
-    └── 05-eventbridge-rule.png 
+    ├── 05-eventbridge-rule.png
+    └── challenge/                          # Images taken from the challenge (extra) part of the project
+        ├── 01-amending-s3-scanner.png
+        ├── 02-iam-role
+        ├── 03-SNSpublishpolicy.png
+        └── 04-creating-sns-topic.ong
+        
+
+    
        
 ```
 
@@ -154,8 +161,9 @@ This feature emails/notifies users when the script is activated.
 'sns_client.publish()'
 
 ![Amending the code for S3-scanner.py](/images/challenge/01-amending-s3-scanner.png)
-![Adding IAM policy for SNS Publishing](/images/challenge/10-adding-iam-policy.png)
-![Creating SNS Email Topic to alert invocations](/images/challenge/11-sns-topic-creation.png)
+![Adding IAM policy for SNS Publishing](/images/challenge/02-iam-role.png)
+![Adding IAM policy for SNS Publishing](/images/challenge/03-SNSpublishpolicy.png)
+![Creating SNS Email Topic to alert invocations](/images/challenge/04-creating-sns-topic.png)
 
 ## References
 - [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/)
