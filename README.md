@@ -163,7 +163,7 @@ This feature emails/notifies users when the script is activated.
 ![Amending the code for S3-scanner.py](/images/challenge/01-amending-s3-scanner.png)
 ![Adding IAM policy to role for SNS Publishing](/images/challenge/02-adding-iam-policy.png)
 ![Creating SNS publish policy to add to role](/images/challenge/03-SNSpublishpolicy.png)
-![Creating SNS Email Topic to alert invocations](/images/challenge/03-creating-sns-topic.png)
+![Creating SNS Email Topic to alert invocations](/images/challenge/04-creating-sns-topic.png)
 
 ## References
 - [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/)
