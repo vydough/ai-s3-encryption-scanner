@@ -133,7 +133,7 @@ ai-security-scanner-s3/
     ├── 05-eventbridge-rule.png
     └── challenge/                          # Images taken from the challenge (extra) part of the project
         ├── 01-amending-s3-scanner.png
-        ├── 02-iam-role
+        ├── 02-adding-iam-policy
         ├── 03-SNSpublishpolicy.png
         └── 04-creating-sns-topic.ong
         
@@ -161,9 +161,9 @@ This feature emails/notifies users when the script is activated.
 'sns_client.publish()'
 
 ![Amending the code for S3-scanner.py](/images/challenge/01-amending-s3-scanner.png)
-![Adding IAM policy for SNS Publishing](/images/challenge/02-iam-role.png)
-![Adding IAM policy for SNS Publishing](/images/challenge/03-adding-iam-policy.png)
-![Creating SNS Email Topic to alert invocations](/images/challenge/04-creating-sns-topic.png)
+![Adding IAM policy to role for SNS Publishing](/images/challenge/02-adding-iam-policy.png)
+![Creating SNS publish policy to add to role](/images/challenge/03-SNSpublishpolicy.png)
+![Creating SNS Email Topic to alert invocations](/images/challenge/03-creating-sns-topic.png)
 
 ## References
 - [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/)
